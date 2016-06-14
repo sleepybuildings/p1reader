@@ -1,0 +1,27 @@
+;
+; Meter Configuration
+;
+;   device      Linux device entry
+;   baudrate    Baudrate
+;
+[meter]
+device=/dev/ttyUSB0
+baudrate=115200
+
+
+;
+; Generic application options
+;
+;   storage    
+;
+[generic]
+storage=mysql
+log=
+
+;
+; Mysql/MariaDB Storage options (optional)
+;
+[mysql]
+host=
+user=
+password=
