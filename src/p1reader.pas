@@ -1,7 +1,7 @@
 (************************************
 
 	P1 Reader
-	(c) Thomas Smit 2016
+	Copyright (c) 2016, Thomas Smit - All rights reserved
 	http://www.sleepybuildings.nl
 	
 *************************************)
@@ -61,7 +61,7 @@ end;
 
 procedure PrintBanner();
 begin
-	Writeln('P1 Reader ', APP_VERSION, ' - (c) Thomas Smit 2016');
+	Writeln('P1 Reader ', APP_VERSION, ' - Copyright (c) 2016, Thomas Smit - All rights reserved.');
 	Writeln(' - https://github.com/sleepybuildings/p1reader');
 	Writeln('');
 end;		

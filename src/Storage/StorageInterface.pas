@@ -1,7 +1,7 @@
 (************************************
 
 	P1 Reader
-	(c) Thomas Smit 2016
+	Copyright (c) 2016, Thomas Smit - All rights reserved
 	http://www.sleepybuildings.nl
 	
 *************************************)
