@@ -69,7 +69,7 @@ const
 	CODE_POWER_IN    = '1-0:1.7.0';
 	CODE_L1          = '1-0:21.7.0';
 var
-   Strpos: integer;
+	Strpos: integer;
 	Code: string;
 
 	function GetNextStringValue(): string;
@@ -118,9 +118,7 @@ begin
 		CODE_IN_LOW:      Telegram^.MeterInLow := GetNextFloatValue;
 		CODE_POWER_IN:    Telegram^.PowerIn := GetNextFloatValue;
 		CODE_L1:          Telegram^.L1 := GetNextFloatValue;
-   end;
-
-
+	end;
 end;
 
 

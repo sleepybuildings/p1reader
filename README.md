@@ -4,10 +4,14 @@ P1 Reader build with Freepascal.
 
 # Install
 
-- `apt-get install fpc`
+- Install Freepascal `apt-get install fpc`
 - run `./make` in the project root
 
-# Reader
+# Configuration
+
+p1reader needs an configuration file in order the run. There is an sample in the `conf` directory.
+
+# Meter fields
 
 The parser currently reads the following DSMR4 field:
 
@@ -18,3 +22,7 @@ The parser currently reads the following DSMR4 field:
 - 1-0:21.7.0
 
 You can at more fields in the `TelegramParser` class (look for the `ParseLine` method)
+
+# Dependencies
+
+- Synapse v40 (modified) for serial communication http://synapse.ararat.cz/
