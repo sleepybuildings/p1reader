@@ -6,8 +6,7 @@ program parsertest;
 
 uses classes, sysutils, TelegramParser;
 
-var 
-	Telegram: TTelegram;
+var
 	Parser: TTelegramparser;
 	Msg: TStringlist;
 	
@@ -17,8 +16,8 @@ begin
 	Msg := TStringlist.Create;
 	
 	try
-		Msg.LoadFromFile('~/testmsg.txt');
-		Telegram := Parser.Parse(Msg);
+		Msg.LoadFromFile('/home/pi/testmsg.txt');
+		Parser.Parse(Msg);
 	finally
 		Msg.Free;
 		Parser.Free;

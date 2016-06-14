@@ -6,7 +6,7 @@
 	
 *************************************)
 
-{$IFDEF FPC}
+{$IFDEF FPC} 
   {$MODE DELPHI}
 {$ENDIF}
 

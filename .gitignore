@@ -1,2 +1,7 @@
 bin/*
 units/*
+.idea
+.AppleDouble
+*.bak
+*.err
+*.out
