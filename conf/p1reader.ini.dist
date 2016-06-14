@@ -8,14 +8,14 @@
 device=/dev/ttyUSB0
 baudrate=115200
 
-
 ;
 ; Generic application options
 ;
-;   storage    
+;   storage    Storage driver (log, ...)
+;   log        Log filename when using storagedriver "log". Defaults to p1reader.log
 ;
 [generic]
-storage=mysql
+storage=log
 log=
 
 ;

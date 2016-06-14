@@ -6,3 +6,4 @@ units/*
 *.err
 *.out
 p1reader.ini
+*.log

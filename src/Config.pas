@@ -21,13 +21,17 @@ type
 	protected
 		FMeterDevice: string;
 		FMeterBaudrate: integer;
-		
+		FStorageDriverName: string;
+		FLogFilename: string;
 	public
 		procedure LoadConfig(Filename: String);
 		class function Instance(): TConfig;
 		
 		property MeterDevice: string read FMeterDevice;
 		property MeterBaudRate: integer read FMeterBaudrate;
+		
+		property StorageDriverName: string read FStorageDriverName;
+		property LogFilename: string read FLogFilename;
 	end;
 	
 	
@@ -47,8 +51,9 @@ end;
 
 procedure TConfig.LoadConfig(Filename: string);
 const
-	SECTION_METER = 'meter';
-	SECTION_MYSQL = 'mysql';
+	SECTION_METER   = 'meter';
+	SECTION_MYSQL   = 'mysql';
+	SECTION_GENERIC = 'generic';
 var
 	IniFile: TIniFile;
 	
@@ -67,6 +72,8 @@ begin
 		FMeterDevice := IniFile.ReadString(SECTION_METER, 'device', '');
 		FMeterBaudrate := ReadInteger(SECTION_METER, 'baudrate');
 		
+		FStorageDriverName := IniFile.ReadString(SECTION_GENERIC, 'storage', '');
+		FLogFilename := IniFile.ReadString(SECTION_GENERIC, 'log', '');
 		
 	finally
 		IniFile.Free;

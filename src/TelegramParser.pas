@@ -58,6 +58,8 @@ begin
 	
 	for index := 0 to Telegram.Count - 1 do
 		ParseLine(Telegram[index], Result);
+		
+	//PrintTelegram(Result);
 end;
 
 

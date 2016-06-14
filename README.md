@@ -11,6 +11,12 @@ P1 Reader build with Freepascal.
 
 p1reader needs an configuration file in order to run. Look for an example in the `conf` directory.
 
+# Storage Drivers
+
+Currently supported:
+
+- `log` Write an csv file. Specify the filename with `log`
+
 # Meter fields
 
 The parser currently reads the following DSMR4 field:
@@ -26,3 +32,7 @@ You can at more fields in the `TelegramParser` class (look for the `ParseLine` m
 # Dependencies
 
 - Synapse v40 (modified) for serial communication http://synapse.ararat.cz/
+
+# Todo
+
+- Mysql/MariaDB storage driver

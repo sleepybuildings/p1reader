@@ -7,14 +7,15 @@
 *************************************)
 
 {$IFDEF FPC}
-  {$MODE DELPHI}
+	{$MODE objfpc}
+	{$H+}
 {$ENDIF}
 
 unit Reader;
 
 interface
 
-uses TelegramBuffer, classes, SerialReader;
+uses TelegramBuffer, classes, SerialReader, StorageInterface;
 
 type
 	TReader = class(TThread)
@@ -25,6 +26,8 @@ type
 		FBuffer: TTelegramBuffer;
 		FSerialReader: TSerialReader;
 		
+		FStorageDriverName: string;
+		
 		(* Binding events *)
 		procedure OnReceivedLine(Line: string);
 		procedure OnTelegramReceived(ReceivedTelegram: TStrings);
@@ -34,6 +37,7 @@ type
 
 	protected
 		procedure Execute; override;
+		function GetStorageDriver: IStorageInterface;	
 	public
 		constructor Create(CreateSuspended: boolean);
 		destructor Destroy; override;
@@ -44,16 +48,19 @@ type
 
 implementation
 
+uses TelegramParser, Config, Log;
 
 constructor TReader.Create(CreateSuspended: boolean);
 begin
 	inherited Create(CreateSuspended);
 	
 	FBuffer := TTelegramBuffer.Create;
-	FBuffer.OnCompleteTelegram := OnTelegramReceived;
+	FBuffer.OnCompleteTelegram := @OnTelegramReceived;
 	
 	FSerialReader := TSerialReader.Create();
-	FSerialReader.OnReceivedLine := OnReceivedLine;
+	FSerialReader.OnReceivedLine := @OnReceivedLine;
+	
+	FStorageDriverName := TConfig.Instance().StorageDriverName;
 end;
 
 destructor TReader.Destroy;
@@ -91,9 +98,39 @@ begin
 end;
 		
 procedure TReader.OnTelegramReceived(ReceivedTelegram: TStrings);
+var
+	Parser: TTelegramParser;
+	Telegram: PTelegram;
+	StorageDriver: IStorageInterface;
 begin
-	writeLn('COMPLETE TELEGRAM!!!');
+	Parser := TTelegramParser.Create;
+	try
+		Telegram := Parser.Parse(ReceivedTelegram);
+		try			
+			
+			StorageDriver := GetStorageDriver;
+			if Assigned(StorageDriver) then
+				StorageDriver.HandleTelegram(Telegram);
+			
+		finally
+			Dispose(Telegram);
+		end;
+	finally
+		Parser.Free;
+	end;		
+end;	
+
+
+function TReader.GetStorageDriver: IStorageInterface;	
+begin
+	Result := nil;
 	
+	case FStorageDriverName of
+		'log': Result := TLog.Create;
+		
+		// De log driver is de default, voor het geval dat...
+		else Result := TLog.Create
+	end;
 end;	
 
 
