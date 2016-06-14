@@ -9,7 +9,7 @@ P1 Reader build with Freepascal.
 
 # Configuration
 
-p1reader needs an configuration file in order the run. There is an sample in the `conf` directory.
+p1reader needs an configuration file in order to run. Look for an example in the `conf` directory.
 
 # Meter fields
 
