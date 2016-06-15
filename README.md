@@ -51,5 +51,4 @@ You can add more fields in the `TelegramParser` class (look for the `ParseLine` 
 
 # Todo
 
-- Mysql/MariaDB storage driver
 - Demon version
