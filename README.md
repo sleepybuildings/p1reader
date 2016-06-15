@@ -4,7 +4,8 @@ A simple P1 Reader build with Freepascal.
 
 # Install
 
-- Install Freepascal `apt-get install fpc`
+- Install Freepascal `apt-get install fpc` (Version 2.6.4 of higher)
+- Install mariadb client `apt-get install libmariadb-client-lgpl-dev-compat`
 - run `./build` in the project root
 
 
