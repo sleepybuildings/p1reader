@@ -11,7 +11,7 @@ baudrate=115200
 ;
 ; Generic application options
 ;
-;   storage    Storage driver (log, ...)
+;   storage    Storage driver (log, mysql...)
 ;   log        Log filename when using storagedriver "log". Defaults to p1reader.log
 ;
 [generic]
@@ -20,8 +20,11 @@ log=
 
 ;
 ; Mysql/MariaDB Storage options (optional)
+; Fill in these options when you use "mysql" as storage
 ;
 [mysql]
-host=
-user=
+hostname=127.0.0.1
+username=
 password=
+database=
+tablename=meter_readings

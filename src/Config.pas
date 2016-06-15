@@ -23,6 +23,12 @@ type
 		FMeterBaudrate: integer;
 		FStorageDriverName: string;
 		FLogFilename: string;
+		
+		FMySQLHostname: string;
+		FMySQLUsername: string;
+		FMySQLPassword: string;
+		FMySQLDatabase: string;
+		FMySQLTable: string;
 	public
 		procedure LoadConfig(Filename: String);
 		class function Instance(): TConfig;
@@ -32,6 +38,12 @@ type
 		
 		property StorageDriverName: string read FStorageDriverName;
 		property LogFilename: string read FLogFilename;
+		
+		property MySQLHostname: string read FMySQLHostname;
+		property MySQLUsername: string read FMySQLUsername;
+		property MySQLPassword: string read FMySQLPassword;
+		property MySQLDatabase: string read FMySQLDatabase;
+		property MySQLTable:    string read FMySQLTable;
 	end;
 	
 	
@@ -74,6 +86,12 @@ begin
 		
 		FStorageDriverName := IniFile.ReadString(SECTION_GENERIC, 'storage', '');
 		FLogFilename := IniFile.ReadString(SECTION_GENERIC, 'log', '');
+		
+		FMySQLHostname := IniFile.ReadString(SECTION_MYSQL, 'hostname', '127.0.0.1');
+		FMySQLUsername := IniFile.ReadString(SECTION_MYSQL, 'username', '');
+		FMySQLPassword := IniFile.ReadString(SECTION_MYSQL, 'password', '');
+		FMySQLDatabase := IniFile.ReadString(SECTION_MYSQL, 'database', '');
+		FMySQLTable    := IniFile.ReadString(SECTION_MYSQL, 'tablename',    '');
 		
 	finally
 		IniFile.Free;

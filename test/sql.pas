@@ -10,7 +10,7 @@ program sql;
 
 *)
 
-uses mysql55conn, sqldb;
+uses mysql55conn, sqldb, sysutils;
 
 var
 	Connection: TMySQL55Connection;
@@ -21,29 +21,36 @@ begin
 	
 	Connection := TMySQL55Connection.Create(nil);
 	Transaction := TSQLTransaction.Create(nil);
+	Query := TSQLQuery.Create(nil);
+	
 	try
 		Connection.Hostname := '127.0.0.1';
 		Connection.Username := '';
 		Connection.Password := '';
 		Connection.DatabaseName := '';
 		
-		Connection.Transaction := Transaction;
-		Connection.Connected := true;
-		
-		Query := TSQLQuery.Create(nil);
 		try
-			Query.Sql.Text := 'INSERT INTO test (test) VALUES("lalalalaal")';
+			
+		
+			Connection.Transaction := Transaction;
+			Connection.Connected := true;
+		
+			Query.Sql.Text := 'INSERT INTO test (test) VALUES("koe vis eend")';
 			Query.Database := Connection;
 			Query.Transaction := Transaction;
-			
+		
 			Query.ExecSQL();
 			Transaction.Commit;
-			Writeln('write?');
-		finally
-			Query.Free;
+		
+			Writeln('write: ', Query.Sql.Text);
+		except
+			on e: exception do Writeln('MySQL error: ' + e.message);
 		end;	
+			
 		
 	finally
+		Query.Free;
+		
 		Transaction.Free;
 		Connection.Free;
 	end;		

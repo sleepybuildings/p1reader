@@ -6,16 +6,15 @@
 	
 *************************************)
 
-{$IFDEF FPC}
-  {$MODE DELPHI}
-{$ENDIF}
+{$mode objfpc}{$H+}
 
 program p1reader;
 
-uses cthreads, crt, sysutils, Reader, Config;//, SerialReader;
+
+uses cthreads, crt, sysutils, Reader, Config;
 
 const
-	APP_VERSION = '0.02';
+	APP_VERSION = '0.03';
 
 
 procedure StartReader();
@@ -75,13 +74,7 @@ begin
 end;
 
 
-procedure WaitForUser();
-begin
-end;	
-
 procedure Start();
-var
-	Baudrate: integer;
 begin
 	if ParamCount < 1 then
 	begin
