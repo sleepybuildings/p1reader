@@ -15,7 +15,7 @@ unit Reader;
 
 interface
 
-uses TelegramBuffer, classes, SerialReader, StorageInterface;
+uses TelegramBuffer, classes, SerialReader, StorageInterface, MySQL;
 
 type
 	TReader = class(TThread)
@@ -126,7 +126,8 @@ begin
 	Result := nil;
 	
 	case FStorageDriverName of
-		'log': Result := TLog.Create;
+		'log':   Result := TLog.Create;
+		'mysql': Result := TMySQL.Create;
 		
 		// De log driver is de default, voor het geval dat...
 		else Result := TLog.Create
