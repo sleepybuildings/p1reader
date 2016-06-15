@@ -18,7 +18,7 @@ p1reader needs an configuration file in order to run. Look for an example and a 
 
 Run the app by specifying the configuration file as the first parameter:
 
-`p1reader ../myconfig.conf` 
+`p1reader ../myconfig.ini` 
 
 Press [ESC] to stop.
 
@@ -30,6 +30,7 @@ p1reader needs to store the received telegrams. You can set the storage though t
 The currently supported storagedrivers are:
 
 - `log` - Write an csv file. Specify the filename with the `generic.log` entry.
+- `mysql` - Use this option to save the readout in an MySQL or MariaDB database. The app is linked againts the mysql 5.5 lib but you can change this in unit  `src/Storage/MySQL.pas`. Look for the `mysql55conn` import and the `TMySQL55Connection` classname. A table scheme can be found in `conf/db/meter_readings.sql`.
 
 
 # Meter fields
