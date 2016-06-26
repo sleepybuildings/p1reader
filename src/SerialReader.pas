@@ -3,10 +3,10 @@
 	P1 Reader
 	Copyright (c) 2016, Thomas Smit - All rights reserved
 	http://www.sleepybuildings.nl
-	
+
 *************************************)
 
-{$IFDEF FPC} 
+{$IFDEF FPC}
   {$MODE DELPHI}
 {$ENDIF}
 
@@ -18,7 +18,7 @@ uses SysUtils, Synaser, TelegramBuffer;
 
 type
 	TOnReceivedLine = procedure(Line: String) of object;
-	
+
 	TSerialReader = class(TObject)
 	private
 		FBaudrate: integer;
@@ -29,16 +29,16 @@ type
 	public
 		constructor Create();
 		destructor Destroy; override;
-		
+
 		procedure Open;
-		procedure Close;	
-		procedure ReadLine;	
-		
-		property Baudrate: integer read FBaudrate write FBaudrate;
+		procedure Close;
+		procedure ReadLine;
+
+                property Baudrate: integer read FBaudrate write FBaudrate;
 		property Device: string read FDevice write FDevice;
 		property OnReceivedLine: TOnReceivedLine read FOnReceivedLine write FOnReceivedLine;
 	end;
-	
+
 implementation
 
 constructor TSerialReader.Create();
@@ -51,7 +51,7 @@ destructor TSerialReader.Destroy();
 begin
 	Close;
 	FConnection.Free;
-	
+
 	inherited Destroy;
 end;
 
@@ -60,36 +60,36 @@ procedure TSerialReader.Open();
 begin
 	if Length(FDevice) = 0 then
 		raise Exception.Create('Device is empty!');
-		
+
 	FConnection.Connect(FDevice);
 	FConnection.Config(FBaudrate, 8, 'N', 6, false, false);
-	
+
 	if FConnection.LastError = ErrPortNotOpen then
 		raise Exception.Create('Port not open!');
 end;
-	
+
 
 procedure TSerialReader.Close();
 begin
 	FConnection.CloseSocket;
-end;	
+end;
 
 
 procedure TSerialReader.ReadLine();
-var 
+var
 	Received: string;
 begin
-	Received := FConnection.Recvstring(1000);
-	
+	Received := FConnection.Recvstring(500);
+      //writeln(Received);
 	if Length(Received) > 0 then
 		DoOnReceivedLine(Received);
-end;	
+end;
 
 
 procedure TSerialReader.DoOnReceivedLine(Line: string);
 begin
 	if Assigned(FOnReceivedLine) then
 		FOnReceivedLine(Line);
-end;		
+end;
 
 end.

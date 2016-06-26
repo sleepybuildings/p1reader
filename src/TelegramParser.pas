@@ -18,14 +18,18 @@ interface
 uses SysUtils, Classes, Math;
 
 type
+	// Zie ook 
+	// 20120403 Dutch Smart Meter Requirements v4.0.4
+	// http://www.netbeheernederland.nl/publicaties/publicatie/?documentregistrationid=1737252
+	
 	PTelegram = ^TTelegram;
 	TTelegram = record
 		Version: integer;
 		SendAt: TDateTime;
 		MeterInNormal: Double;  // kWh
 		MeterInLow: Double;     // kWh
-		PowerIn: Double;        // kW
-		L1: Double;             // kW
+		PowerIn: Double;        // kW - 1-0:1.7.0.255 Actual electricity power delivered (+P) in 1 Watt resolution
+		L1: Double;             // kW - 1-0:21.7.0    Instantaneous active power L1 (+P) in W resolution
 	end;
 
 	TTelegramParser = class(TObject)
@@ -68,7 +72,7 @@ const
    CODE_VERSION     = '1-3:0.2.8';
 	CODE_IN_NORMAL   = '1-0:1.8.1';
 	CODE_IN_LOW      = '1-0:1.8.2';
-	CODE_POWER_IN    = '1-0:1.7.0';
+	CODE_POWER_IN    = '1-0:1.7.0';   
 	CODE_L1          = '1-0:21.7.0';
 var
 	Strpos: integer;
