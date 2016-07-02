@@ -29,6 +29,9 @@ type
 		FMySQLPassword: string;
 		FMySQLDatabase: string;
 		FMySQLTable: string;
+		
+		FExternalCmd: string;
+		FExternalArgs: string;
 	public
 		procedure LoadConfig(Filename: String);
 		class function Instance(): TConfig;
@@ -44,6 +47,9 @@ type
 		property MySQLPassword: string read FMySQLPassword;
 		property MySQLDatabase: string read FMySQLDatabase;
 		property MySQLTable:    string read FMySQLTable;
+		
+		property ExternalArgs:  string read FExternalArgs;
+		property ExternalCmd:   string read FExternalCmd;
 	end;
 	
 	
@@ -63,9 +69,10 @@ end;
 
 procedure TConfig.LoadConfig(Filename: string);
 const
-	SECTION_METER   = 'meter';
-	SECTION_MYSQL   = 'mysql';
-	SECTION_GENERIC = 'generic';
+	SECTION_METER    = 'meter';
+	SECTION_MYSQL    = 'mysql';
+	SECTION_GENERIC  = 'generic';
+	SECTION_EXTERNAL = 'external';
 var
 	IniFile: TIniFile;
 	
@@ -91,7 +98,10 @@ begin
 		FMySQLUsername := IniFile.ReadString(SECTION_MYSQL, 'username', '');
 		FMySQLPassword := IniFile.ReadString(SECTION_MYSQL, 'password', '');
 		FMySQLDatabase := IniFile.ReadString(SECTION_MYSQL, 'database', '');
-		FMySQLTable    := IniFile.ReadString(SECTION_MYSQL, 'tablename',    '');
+		FMySQLTable    := IniFile.ReadString(SECTION_MYSQL, 'tablename','');
+		
+		FExternalCmd   := IniFile.ReadString(SECTION_EXTERNAL, 'cmd',  '');
+		FExternalArgs  := IniFile.ReadString(SECTION_EXTERNAL, 'args', '');
 		
 	finally
 		IniFile.Free;

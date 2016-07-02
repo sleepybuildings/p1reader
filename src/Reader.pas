@@ -48,7 +48,7 @@ type
 
 implementation
 
-uses TelegramParser, Config, Log, SysUtils;
+uses TelegramParser, Config, Log, SysUtils, Externalstorage;
 
 constructor TReader.Create(CreateSuspended: boolean);
 begin
@@ -88,7 +88,6 @@ begin
 
 	while not Terminated do
 	begin
-                // Sleep(1000);
 		FSerialReader.ReadLine();
 	end;
 end;
@@ -127,11 +126,12 @@ begin
 	Result := nil;
 
 	case FStorageDriverName of
-		'log':   Result := TLog.Create;
-		'mysql': Result := TMySQL.Create;
+		'log':      Result := TLog.Create;
+		'mysql':    Result := TMySQL.Create;
+		'external': Result := TExternalStorage.Create;
 
 		// De log driver is de default, voor het geval dat...
-		else Result := TLog.Create
+		else Result := TLog.Create;
 	end;
 end;
 
