@@ -13,6 +13,7 @@ baudrate=115200
 ;
 ;   storage    Storage driver (log, mysql...)
 ;   log        Log filename when using storagedriver "log". Defaults to p1reader.log
+;   external   Writes data to an external app.
 ;
 [generic]
 storage=log
@@ -28,3 +29,7 @@ username=
 password=
 database=
 tablename=meter_readings
+
+[external]
+cmd=
+args=
