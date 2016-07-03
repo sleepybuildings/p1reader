@@ -25,13 +25,13 @@ Press [ESC] to stop.
 
 # Storage Drivers
 
-p1reader needs to store the received telegrams. You can set the storage though the `generic.storage` option.
+p1reader needs to store the received telegrams. You can set the storage through the `generic.storage` option.
 
 The currently supported storagedrivers are:
 
 - `log` - Write an csv file. Specify the filename with the `generic.log` entry.
 - `mysql` - Use this option to save the readout in an MySQL or MariaDB database. The app is linked againts the mysql 5.5 lib but you can change this in unit  `src/Storage/MySQL.pas`. Look for the `mysql55conn` import and the `TMySQL55Connection` classname. A table scheme can be found in `conf/db/meter_readings.sql`.
-
+- `external` - Starts an external tool and passes the telegram in csv form through stdin. Use the `cmd` and `args` configuration options to specifify a program. See my related project [Piphome](https://github.com/sleepybuildings/Piphome/blob/master/app/Console/Commands/p1reader.php) for an example.
 
 # Meter fields
 
@@ -51,4 +51,5 @@ You can add more fields in the `TelegramParser` class (look for the `ParseLine` 
 
 # Todo
 
-- Demon version
+- Demon version (or just run it in a screen session)
+
