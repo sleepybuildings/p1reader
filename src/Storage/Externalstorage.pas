@@ -50,6 +50,8 @@ begin
 		
 		Process.Input.Write(data[1] , Length(data));
 		
+		Process.WaitOnExit();
+		
 	finally
 		Process.Free;
 	end;			
@@ -71,7 +73,8 @@ begin
 	Output := Output + Format('%.3f', [Telegram^.PowerIn]);
 	Output := Output + ',';
 	Output := Output + Format('%.3f', [Telegram^.L1]);
-	
+	Output := Output + LineEnding;
+
 	Push(Output);
 end;		
 	
