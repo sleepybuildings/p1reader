@@ -47,10 +47,9 @@ begin
 		
 		Process.Options := Process.Options + [poUsePipes];
 		Process.Execute;
-		
+
 		Process.Input.Write(data[1] , Length(data));
-		
-		Process.WaitOnExit();
+//		Process.WaitOnExit();
 		
 	finally
 		Process.Free;
